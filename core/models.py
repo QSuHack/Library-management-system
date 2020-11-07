@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 class Book(models.Model):
     class Status(models.IntegerChoices):
@@ -18,10 +18,15 @@ class Book(models.Model):
     signature = models.CharField(max_length=30)
     
 class Reader (models.Model):
+    user = models.OneToOneField(to=User, on_delete =models.CASCADE)
     is_suspended = models.BooleanField(default=False)
     account =  models.DecimalField(max_digits=8,decimal_places=2, default=0)
+    issue_limit = models.IntegerField(default=10)
     books_issued = models.ManyToManyField(to=Book)
+    
 class Request(models.Model):
     user =models.ForeignKey(to=Reader, on_delete=models.SET_NULL, null=True)
     date= models.DateTimeField(auto_now_add=True)
     book = models.ForeignKey(to=Book, on_delete=models.CASCADE)
+    is_completed = models.BooleanField(default=False)
+    is_rejected = models.BooleanField(default=False)
