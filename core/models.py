@@ -15,6 +15,7 @@ class Book(models.Model):
     added_date = models.DateField(auto_now_add=True)
     status = models.IntegerField(choices=Status.choices)
     cover = models.CharField(max_length=200, blank=True, null=True, default=None)
+    publish_year= models.IntegerField()
     signature = models.CharField(max_length=30)
     
 class Reader (models.Model):
