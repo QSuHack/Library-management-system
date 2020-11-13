@@ -3,13 +3,19 @@
 <div class="container">
 <div class="row">
 <div class="col-2"></div>
-<div class="text-secondary">Results for "{{query_requested}}"</div>
+<div class="text-secondary">Results for  <p class=" font-italic">{{query_requested}}</p></div>
 </div>
 {% for obj in object_list %}
 <div class="row">
 <div class="col-2"></div>
 <div class="col-8"> <!--book object -->
-<a href="{% url 'book-detail' obj.id %}"><li class="list-group-item">{{obj.title}}</li></a>
+<a href="{% url 'book-detail' obj.id %}">
+<li class="list-group-item">
+    <img class="float-left img-fluid" src="{{obj.cover}}"><div>
+    <div>{{obj.title}}</div>
+    <div class="text-secondary">{{obj.author}}, {{obj.publish_year}}</div>
+    <div class="text-secondary">{{obj.signature}}</div></div>
+</li></a>
 </div>
 <div class="col-2"></div>
 </div>
